@@ -1,6 +1,7 @@
 mod utils;
 
 use wasm_bindgen::prelude::*;
+use web_sys::console;
 
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
 // allocator.
@@ -13,7 +14,18 @@ extern {
     fn alert(s: &str);
 }
 
+// #[wasm_bindgen(start)]
+// pub fn init() {
+//     utils::set_panic_hook();
+// }
+
+// Automatically runs when the Wasm module loads, clearing the dead-code warning
+#[wasm_bindgen(start)]
+pub fn init() {
+    utils::set_panic_hook();
+}
+
 #[wasm_bindgen]
 pub fn greet() {
-    alert("Hello, hello-world-wasm!");
+    console::log_1(&"Hello, hello-world-wasm!".into());
 }
